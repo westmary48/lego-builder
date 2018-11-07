@@ -34,15 +34,15 @@
     "jquery": "^3.3.1",
     "popper.js": "^1.14.4"
   },
-"repository": {
-"type": "git",
-"url": "git+https://github.com/westmary48/lego-builder.git"
-},
-"keywords": [],
-"author": "",
-"license": "ISC",
-"bugs": {
-"url": "https://github.com/westmary48/lego-builder/issues"
-},
-"homepage": "https://github.com/westmary48/lego-builder#readme"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/westmary48/lego-builder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/westmary48/lego-builder/issues"
+  },
+  "homepage": "https://github.com/westmary48/lego-builder#readme"
 }
