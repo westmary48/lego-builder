@@ -1,1 +1,4 @@
-console.log(partsData);
+import 'jquery';
+import 'bootstrap';
+
+console.log('partsData');
