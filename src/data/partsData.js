@@ -3,33 +3,44 @@ import 'bootstrap';
 
 import axios from 'axios';
 
-const getFullBodyInfo = heads => Promise.all([getAllTorsosFromDb(), getAllLegsFromDb()])
-  .then((dataArray) => {
-    const getAllHeadsFromDb = heads;
-    const getAllTorsosFromDb = dataArray[0].data;
-    const getAllLegsFromDb = dataArray[1].data;
-    const newHead = [];
-    getAllHeadsFromDb.forEach((head) => {
-      const newHead = head;
-      getAllTorsosFromDb.forEach((torso) => {
-        // if (head.teamId === torso.id) {
-        //   newhead.team = torso.name;
-        }
-      });
-      getAllLegsFromDb.forEach((legs) => {
-        // if (leg.positionId === position.id) {
-        //   newHead.position = position.name;
-        }
-      newHead.push(newHead);
+
+const getAllHeadsFromDb = () => new Promise((resolve, reject) => {
+  axios.get('http://localhost:8089/heads')
+    .done((data) => {
+      resolve(data);
+    })
+    .fail((error) => {
+      reject(error);
     });
-    return Promise.resolve(newHeads);
-  })
-  .catch((error) => {
-    console.error({ error });
-  });
+});
 
-const getAllHeadsFromDb = () => axios.get('hhttp://localhost:8089/heads');
+const getAllTorsosFromDb = () => new Promise((resolve, reject) => {
+  axios.get('http://localhost:8089/torsos')
+    .done((data) => {
+      resolve(data);
+    })
+    .fail((error) => {
+      reject(error);
+    });
+});
 
-const getAllTorsosFromDb = () => axios.get('hhttp://localhost:8089/torsos');
 
-const getAllLegsFromDb = () => axios.get('hhttp://localhost:8089/legs');
+const getAllLegsFromDb = () => new Promise((resolve, reject) => {
+  axios.get('http://localhost:8089/legs')
+    .done((data) => {
+      resolve(data);
+    })
+    .fail((error) => {
+      reject(error);
+    });
+});
+
+const allData = () => {
+  getAllHeadsFromDb();
+  getAllTorsosFromDb();
+  getAllLegsFromDb();
+};
+
+allData();
+
+export default allData;

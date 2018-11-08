@@ -1,50 +1,53 @@
 import 'jquery';
 import 'bootstrap';
 
+import allData from '../../data/partsData';
+
 
 const headBuilder = (head) => {
   const domString = `
-    <li class="player-team-${head.id}">
+    <li class="head-id-${head[0].id}">
       <div class="img-holder">
-        <img class="player-img" src="${head.imgURL}">
+        <img class="head-img" src="${head[0].imgURL}">
       </div>
-      <h3 class="header-name">${head.name}</h3>
+      <h3 class="head-name">${head[0].name}</h3>
     </li>
   `;
-
-  return domString;
+  $('#headsId').html(domString);
 };
 
 const torsosBuilder = (torso) => {
   const domString = `
-      <li class="player-team-${torso.id}">
+      <li class="player-id-${torso[0].id}">
         <div class="img-holder">
-          <img class="player-img" src="${torso.imgURL}">
+          <img class="torsos-img" src="${torso[0].imgURL}">
         </div>
-        <h3 class="header-name">${torso.name}</h3>
+        <h3 class="torsos-name">${torso[0].name}</h3>
       </li>
     `;
 
-  return domString;
+  $('#torsosId').html(domString);
 };
 
 const legsBuilder = (leg) => {
   const domString = `
-      <li class="player-team-${leg.id}">
+      <li class="legs-team ${leg[0].id}">
         <div class="img-holder">
-          <img class="player-img" src="${leg.imgURL}">
+          <img class="legs-img" src="${leg[0].imgURL}">
         </div>
-        <h3 class="header-name">${leg.name}</h3>
+        <h3 class="legs-name">${leg[0].name}</h3>
       </li>
     `;
-
-  return domString;
+  $('#legsId').html(domString);
 };
 
 const legoBuilder = () => {
   headBuilder();
   torsosBuilder();
   legsBuilder();
+  allData();
 };
 
 legoBuilder();
+
+export default legoBuilder;
