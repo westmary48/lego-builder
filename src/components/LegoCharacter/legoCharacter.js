@@ -1,7 +1,7 @@
 import 'jquery';
 import 'bootstrap';
 
-import allData from '../../data/partsData';
+import partsData from '../../data/partsData';
 
 
 const headBuilder = (head) => {
@@ -16,6 +16,14 @@ const headBuilder = (head) => {
   $('#headsId').html(domString);
 };
 
+partsData.getAllHeadsFromDb()
+  .then((data) => {
+    headBuilder(data.data.cats);
+  })
+  .catch((error) => {
+    console.error({ error });
+  });
+
 const torsosBuilder = (torso) => {
   const domString = `
       <li class="player-id-${torso[0].id}">
@@ -29,6 +37,15 @@ const torsosBuilder = (torso) => {
   $('#torsosId').html(domString);
 };
 
+partsData.getAllTorsosFromDb()
+  .then((data) => {
+    torsosBuilder(data.data.cats);
+  })
+  .catch((error) => {
+    console.error({ error });
+  });
+
+
 const legsBuilder = (leg) => {
   const domString = `
       <li class="legs-team ${leg[0].id}">
@@ -41,11 +58,18 @@ const legsBuilder = (leg) => {
   $('#legsId').html(domString);
 };
 
+partsData.getAllLegsFromDb()
+  .then((data) => {
+    legsBuilder(data.data.cats);
+  })
+  .catch((error) => {
+    console.error({ error });
+  });
+
 const legoBuilder = () => {
   headBuilder();
   torsosBuilder();
   legsBuilder();
-  allData();
 };
 
 legoBuilder();

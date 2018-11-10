@@ -3,37 +3,12 @@ import 'bootstrap';
 
 import axios from 'axios';
 
+const getAllHeadsFromDb = () => axios.get('http://localhost:8089/heads');
 
-const getAllHeadsFromDb = () => new Promise((resolve, reject) => {
-  axios.get('http://localhost:8089/heads')
-    .done((data) => {
-      resolve(data);
-    })
-    .fail((error) => {
-      reject(error);
-    });
-});
+const getAllTorsosFromDb = () => axios.get('http://localhost:8089/torsos');
 
-const getAllTorsosFromDb = () => new Promise((resolve, reject) => {
-  axios.get('http://localhost:8089/torsos')
-    .done((data) => {
-      resolve(data);
-    })
-    .fail((error) => {
-      reject(error);
-    });
-});
+const getAllLegsFromDb = () => axios.get('http://localhost:8089/legs');
 
-
-const getAllLegsFromDb = () => new Promise((resolve, reject) => {
-  axios.get('http://localhost:8089/legs')
-    .done((data) => {
-      resolve(data);
-    })
-    .fail((error) => {
-      reject(error);
-    });
-});
 
 const allData = () => {
   getAllHeadsFromDb();
@@ -43,4 +18,4 @@ const allData = () => {
 
 allData();
 
-export default allData;
+export default { getAllHeadsFromDb, getAllTorsosFromDb, getAllLegsFromDb };
