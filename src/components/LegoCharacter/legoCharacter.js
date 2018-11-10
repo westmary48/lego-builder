@@ -1,77 +1,83 @@
-import 'jquery';
+import $ from 'jquery';
 import 'bootstrap';
 
 import partsData from '../../data/partsData';
 
 
-const headBuilder = (head) => {
-  const domString = `
-    <li class="head-id-${head[0].id}">
-      <div class="img-holder">
-        <img class="head-img" src="${head[0].imgURL}">
-      </div>
-      <h3 class="head-name">${head[0].name}</h3>
-    </li>
-  `;
-  $('#headsId').html(domString);
+const headBuilder = (headsArray) => {
+  let newString = '';
+  for (let i = 0; i < headsArray.length; i += 1) {
+    newString += `
+        <div class ="card-containter">
+          <div class="card-body">
+            <h2 class="card-id">${headsArray[i].id}</h2>
+            <img class="card-image" src = "${headsArray[i].imageUrl}">
+            <div class="card-name">${headsArray[i].name}</div>
+          </div>
+         </div>`;
+  }
+  $('#heads').html(newString);
 };
 
-partsData.getAllHeadsFromDb()
-  .then((data) => {
-    headBuilder(data.data.cats);
-  })
-  .catch((error) => {
-    console.error({ error });
-  });
+const torsosBuilder = (torsosArray) => {
+  let newString = '';
+  for (let i = 0; i < torsosArray.length; i += 1) {
+    newString += `
+          <div class ="card-containter">
+            <div class="card-body">
+              <h2 class="card-id">${torsosArray[i].id}</h2>
+              <img class ="card-image" src = "${torsosArray[i].imageUrl}">
+              <div class="card-name">${torsosArray[i].name}</div>
+            </div>
+           </div>`;
+  }
 
-const torsosBuilder = (torso) => {
-  const domString = `
-      <li class="player-id-${torso[0].id}">
-        <div class="img-holder">
-          <img class="torsos-img" src="${torso[0].imgURL}">
-        </div>
-        <h3 class="torsos-name">${torso[0].name}</h3>
-      </li>
-    `;
-
-  $('#torsosId').html(domString);
+  $('#torsos').html(newString);
 };
 
-partsData.getAllTorsosFromDb()
-  .then((data) => {
-    torsosBuilder(data.data.cats);
-  })
-  .catch((error) => {
-    console.error({ error });
-  });
-
-
-const legsBuilder = (leg) => {
-  const domString = `
-      <li class="legs-team ${leg[0].id}">
-        <div class="img-holder">
-          <img class="legs-img" src="${leg[0].imgURL}">
-        </div>
-        <h3 class="legs-name">${leg[0].name}</h3>
-      </li>
-    `;
-  $('#legsId').html(domString);
+const legsBuilder = (legsArray) => {
+  let newString = '';
+  for (let i = 0; i < legsArray.length; i += 1) {
+    newString += `
+          <div class ="card-containter">
+            <div class="card-body">
+              <h2 class="card-id">${legsArray[i].id}</h2>
+              <img class="card-image" src = "${legsArray[i].imageUrl}">
+              <div class="card-name">${legsArray[i].name}</div>
+            </div>
+           </div>`;
+  }
+  $('#legs').html(newString);
+};
+const headsData = () => {
+  partsData.getAllHeadsFromDb()
+    .then((data) => {
+      console.log(data.data);
+      headBuilder(data.data);
+    })
+    .catch((error) => {
+      console.error({ error });
+    });
 };
 
-partsData.getAllLegsFromDb()
-  .then((data) => {
-    legsBuilder(data.data.cats);
-  })
-  .catch((error) => {
-    console.error({ error });
-  });
-
-const legoBuilder = () => {
-  headBuilder();
-  torsosBuilder();
-  legsBuilder();
+const torsosData = () => {
+  partsData.getAllTorsosFromDb()
+    .then((data) => {
+      torsosBuilder(data.data);
+    })
+    .catch((error) => {
+      console.error({ error });
+    });
 };
 
-legoBuilder();
+const legsData = () => {
+  partsData.getAllLegsFromDb()
+    .then((data) => {
+      legsBuilder(data.data);
+    })
+    .catch((error) => {
+      console.error({ error });
+    });
+};
 
-export default legoBuilder;
+export default { legsData, torsosData, headsData };
